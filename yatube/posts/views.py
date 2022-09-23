@@ -115,7 +115,7 @@ def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     if Follow.objects.filter(
             user=request.user,
-            author=author).exists() and request.user == author:
+            author=author).exists() or request.user == author:
         return redirect('posts:follow_index')
     Follow.objects.create(
         user=request.user,
