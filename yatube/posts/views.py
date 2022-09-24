@@ -36,7 +36,6 @@ def profile(request, username):
         user=request.user, author=author).exists()
     context = {
         'author': author,
-        'post_count': author.posts.count(),
         'page_obj': pages_per_page(request, posts, POST_PER_PAGE),
         'following': following
     }
@@ -52,8 +51,7 @@ def post_detail(request, post_id):
         'post': post,
         'post_count': post.author.posts.count(),
         'form': form,
-        'comments': comments_all,
-        'author': post.author
+        'comments': comments_all
     }
     return render(request, 'posts/post_detail.html', context)
 

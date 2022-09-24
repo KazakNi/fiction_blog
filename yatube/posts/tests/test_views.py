@@ -117,7 +117,7 @@ class TaskPagesTests(TestCase):
         response = self.authorized_client.get(
             reverse('posts:profile', kwargs={'username': TaskPagesTests.user}))
         first_object = response.context['page_obj'][1]
-        posts_amount = response.context['post_count']
+        posts_amount = Post.objects.filter(author=TaskPagesTests.user).count()
         task_text_0 = first_object.text
         task_group_0 = first_object.group.title
         task_author_0 = first_object.author.username
@@ -235,13 +235,16 @@ class TaskPagesTests(TestCase):
             'author': TaskPagesTests.user,
             'post': TaskPagesTests.post
         }
-        response = self.authorized_client.post(
+        self.authorized_client.post(
             reverse('posts:add_comment',
                     kwargs={'post_id': TaskPagesTests.post.id}),
             data=form_data,
             follow=True
         )
-        self.assertContains(response, 'Привет')
+        response = self.authorized_client.get(
+            reverse('posts:post_detail',
+                    kwargs={'post_id': TaskPagesTests.post.id}))
+        self.assertEqual(response.context['comments'][0].text, 'Привет')
 
     def test_404_template_custom_display(self):
         response = self.authorized_client.get('unforeknowable/')
