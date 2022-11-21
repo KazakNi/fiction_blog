@@ -28,8 +28,8 @@
     <a href="#" class="list-group-item list-group-item-action list-group-item-info">{{ post.text }}</a>
   </div>     
 </p>    
-    {% if post.group %}
     <a href="{% url 'posts:post_detail' post.pk %}">Подробная информация</a> <br>
+    {% if post.group %}
       <a href="{% url 'posts:group_list' post.group.slug %}">Записи группы: {{post.group}}</a>
     {% endif %}
     {% if not forloop.last %}<hr>{% endif %}
