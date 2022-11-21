@@ -10,9 +10,3 @@ def user(django_user_model):
 def user_client(user, client):
     client.force_login(user)
     return client
-
-
-@pytest.fixture
-def another_user(mixer):
-    from django.contrib.auth.models import User
-    return mixer.blend(User, username='AnotherUser')
