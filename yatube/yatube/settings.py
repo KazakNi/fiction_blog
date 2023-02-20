@@ -15,7 +15,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = os.environ("MY_KEY")
+SECRET_KEY = os.environ.get("MY_KEY")
 
 
 DEBUG = False
