@@ -132,6 +132,7 @@ LOGIN_REDIRECT_URL = 'posts:main_page'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CACHES = {
